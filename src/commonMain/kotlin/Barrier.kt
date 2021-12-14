@@ -2,6 +2,8 @@ import arrow.core.prependTo
 import arrow.fx.coroutines.parSequence
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.sync.Semaphore
+import predef.Console
+import predef.Temporal
 
 /**
  * Consider again the Rendezvous problem. A limitation of the solution we presented is that it does
@@ -35,36 +37,6 @@ fun bTask(
   console.putStr("Availability: $y")
   barrier.await()
   console.putStr("Task $number after critical point")
-}
-
-class BTask(
-  val number: Int,
-  val barrier: CompletableDeferred<Unit>,
-  val signal: Semaphore,
-  console: Console = Console.Default
-) : Console by console {
-
-  suspend fun use(): Unit {
-    putStr("Task $number started")
-    signal.release()
-    val y = signal.availablePermits
-    putStr("Availability: $y")
-    barrier.await()
-    putStr("Task $number after critical point")
-  }
-}
-
-suspend fun barrier(
-  tasks: Int,
-  mutex: CompletableDeferred<Unit>,
-  signal: Semaphore,
-  console: Console = Console.Default
-){
-  console.putStr("Barrier started")
-  // No acquireN available for KotlinX
-  repeat(tasks) { signal.acquire() }
-  mutex.complete(Unit)
-  console.putStr("Barrier completed")
 }
 
 class Barrier(

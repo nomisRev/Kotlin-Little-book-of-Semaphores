@@ -3,6 +3,8 @@ import arrow.fx.coroutines.parZip
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.sync.Semaphore
+import predef.Console
+import predef.Temporal
 
 suspend fun ExclusiveQueues(total: Int) {
   val leaderQueue = Channel<Unit>(1000)

@@ -5,7 +5,7 @@ import kotlinx.coroutines.sync.Semaphore
 
 /**
  * Possibly the simplest use for a semaphore is signaling, which means that one thread send a
- * signal to another thread to indicate that something has happend.
+ * signal to another thread to indicate that something has happened.
  *
  * Signaling makes it possible to guarantee that a section of code in one thread will run before a
  * section of code in another thread; in other words, it solves the serialization problem.

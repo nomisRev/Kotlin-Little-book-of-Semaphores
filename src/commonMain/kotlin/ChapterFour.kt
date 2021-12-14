@@ -3,8 +3,11 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import predef.Console
+import predef.Temporal
 
-/** In one common pattern, some threads are producers and some are consumers. Producers create
+/**
+ * In one common pattern, some threads are producers and some are consumers. Producers create
  * items of some kind and add them to a data structure; consumers remove the items and process
  * them.
  *
@@ -42,24 +45,4 @@ suspend fun consumerProducer(
   }, {
     repeat(total) { consume(channel) }
   }) { _, _ -> }
-}
-
-interface Console {
-  suspend fun putStr(msg: String): Unit
-
-  companion object {
-    val Default = object : Console {
-      override suspend fun putStr(msg: String) = println(msg)
-    }
-  }
-}
-
-interface Temporal {
-  suspend fun sleep(duration: Duration): Unit
-
-  companion object {
-    val Default = object : Temporal {
-      override suspend fun sleep(duration: Duration) = delay(duration)
-    }
-  }
 }

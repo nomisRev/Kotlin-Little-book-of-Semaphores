@@ -4,7 +4,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Semaphore
 import predef.debug
 
-/** Redezvous: The idea is that two threads redezvous at a point of execution and neither is allowed
+/**
+ * Rendezvous: The idea is that two threads redezvous at a point of execution and neither is allowed
  * to proceed until both have arrived.
  *
  * We want two guarantee that a1 happen before b2 and b1 happen before a2

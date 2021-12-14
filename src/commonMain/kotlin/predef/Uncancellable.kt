@@ -17,7 +17,7 @@ interface UncancellableRegion : CoroutineScope {
 /**
  * Uncancellable builder that allows for creating regions of cancellable blocks.
  * This is very useful when working with predef.uncancellable code,
- * since often you'll want to execute a cancellable piece in the middle of predef.uncancellable code.
+ * since often you'll want to execute a cancellable piece in the middle of an uncancellable piece of code.
  *
  * i.e.
  *
@@ -46,6 +46,9 @@ interface UncancellableRegion : CoroutineScope {
  * }
  * ```
  *
+ * See [CyclicBarrier] for an example, where we work with atomic state in an uncancellable way,
+ * and await the in a cancellable way.
+ *
  * Port of Async#predef.uncancellable from Cats-effect
  */
 suspend fun <A> uncancellable(body: suspend UncancellableRegion.() -> A): A {
@@ -59,6 +62,7 @@ private class PollImpl(
   val original: CoroutineContext,
   val scope: CoroutineScope
 ) : UncancellableRegion, CoroutineScope by scope {
+  // We can run a cancellable block by running the suspend function on the original context.
   override suspend fun <A> cancellable(action: suspend () -> A): A =
     suspendCoroutineUninterceptedOrReturn { cont ->
       action.startCoroutineUninterceptedOrReturn(Continuation(original, cont::resumeWith))

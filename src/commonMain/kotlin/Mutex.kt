@@ -5,7 +5,8 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import predef.debug
 
-/** Often the code that needs to be protected is called the critical section, I suppose because it
+/**
+ * Often the code that needs to be protected is called the critical section, I suppose because it
  * is critically important to prevent concurrent access.
  */
 suspend fun mutex(): Unit {

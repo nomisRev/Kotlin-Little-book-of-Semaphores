@@ -1,8 +1,11 @@
 import arrow.fx.coroutines.parTraverse
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.sync.Semaphore
+import predef.Console
+import predef.Temporal
 
-/** Generalize the previous solution so that it allows multiple threads to run in the critical
+/**
+ * Generalize the previous solution so that it allows multiple threads to run in the critical
  * section at the same time, but it enforces an upper limit on the number of concurrent threads. In
  * other words, no more than n threads can run in the critical section at the same time. This
  * pattern is called a multiplex.

@@ -1,9 +1,10 @@
-import arrow.fx.coroutines.parSequence
 import arrow.fx.coroutines.parTraverse
+import predef.Console
 import predef.CyclicBarrier
 
-/** By using CyclicBarrier we can implement Reusable Barrier problem and preloaded turnstile at the same time. */
-suspend fun CyclicBarrier(total: Int) {
+/**
+ * By using CyclicBarrier we can implement Reusable Barrier problem and preloaded turnstile at the same time. */
+suspend fun cyclicBarrier(total: Int) {
   val barrier1 = CyclicBarrier(total)
   val barrier2 = CyclicBarrier(total)
   (0..total).parTraverse {
@@ -28,5 +29,4 @@ class CTask(
     putStr("Task $number after critical point")
     barrier2.await()
   }
-
 }
