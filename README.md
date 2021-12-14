@@ -1,12 +1,4 @@
-# Arrow-MPP-Template
+# Kotlin - Little book of Semaphores
 
-A template project for Arrow on MPP.
-It defines currently supported targets from Arrow inside `build.gradle.kts`.
-See the official documentation [here](https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets) on target definiton.
-
-It sets up all Arrow MPP dependencies: 
- - Arrow Core
- - Arrow Fx
- - Arrow Optics
-
-And it sets up [Kotest 5.0.0.M1](https://kotest.io/) for allowing testing of all targets.
+This is a project to learn about Synchronization and Concurrency via [Little book of Semaphores](https://www.greenteapress.com/semaphores/LittleBookOfSemaphores.pdf).
+It uses Kotlin & Arrow, and is inspired by the work of [lenguyenthanh](https://github.com/lenguyenthanh/catsphores).
